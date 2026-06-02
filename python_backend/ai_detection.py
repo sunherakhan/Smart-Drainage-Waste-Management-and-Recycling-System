@@ -145,11 +145,10 @@ def main():
             processed = detector.process_frame(frame)
             st.image(processed, channels="BGR")
             
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
+            
                 
     cap.release()
-    cv2.destroyAllWindows()
+    
     print("[INFO] AI inference stream closed down gracefully.")
 
 if __name__ == "__main__":
