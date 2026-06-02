@@ -4,7 +4,7 @@ Uses OpenCV to simulate a real-time object detection feed of drainage channels,
 performing segmentation, color-based material filtering (simulating plastic/metal/organics), 
 and visual tracking with bounding boxes.
 """
-
+import streamlit as st
 import cv2
 import numpy as np
 import time
@@ -128,10 +128,9 @@ def main():
             cv2.circle(frame, ((p_x + 300) % canvas_w, p_y + 10), 18, (40, 180, 50), -1) # Green leaf in BGR
             
             processed = detector.process_frame(frame)
-            cv2.imshow("AURA-DRAIN: AI Machine Learning Vision Feed", processed)
+            st.image(processed, channels="BGR")
             
-            if cv2.waitKey(30) & 0xFF == ord('q'):
-                break
+            
     else:
         print("[RUNNING] Real-time camera feed active. Position high-contrast blue plastic or green leaves in front of camera to see sorting AI in action!")
         print("[RUNNING] Press 'q' inside the OpenCV window to exit.")
@@ -144,7 +143,7 @@ def main():
             frame = cv2.flip(frame, 1)
             
             processed = detector.process_frame(frame)
-            cv2.imshow("AURA-DRAIN: AI Machine Learning Vision Feed", processed)
+            st.image(processed, channels="BGR")
             
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
